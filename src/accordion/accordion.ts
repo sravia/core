@@ -1,4 +1,4 @@
-import {Component, Directive, forwardRef, Inject, Input, Query, QueryList} from 'angular2/angular2';
+import {Component, Directive, forwardRef, Inject, Optional, Input, Query, QueryList} from 'angular2/angular2';
 
 @Component({
   selector: 'ngb-accordion-group, [ngb-accordion-group]',
@@ -25,14 +25,14 @@ export class NgbAccordionGroup {
   @Input()
   set isOpen(value: boolean) {
     this._isOpen = value;
-    if (value) {
+    if (value && this.accordion) {
       this.accordion.closeOthers(this);
     }
   }
 
   get isOpen(): boolean { return this._isOpen; }
 
-  constructor(@Inject(forwardRef(() => NgbAccordion)) private accordion: NgbAccordion) {}
+  constructor(@Optional() @Inject(forwardRef(() => NgbAccordion)) private accordion: NgbAccordion) {}
 
   toggleOpen(event): void {
     event.preventDefault();
