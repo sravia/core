@@ -9,7 +9,8 @@ import {DEMO_DIRECTIVES, DEMO_SNIPPETS} from './demos';
     <ngbd-content-wrapper component="Alert">
       <ngbd-api-docs directive="NgbAlert"></ngbd-api-docs>
       <ngbd-api-docs directive="NgbDismissibleAlert"></ngbd-api-docs>
-      <ngbd-example-box demoTitle="Basic Alert" [htmlSnippet]="snippets.basic.markup" [tsSnippet]="snippets.basic.code">
+      <ngbd-example-box demoTitle="Basic Alert" component="alert" demo="basic" 
+        [htmlSnippet]="snippets.basic.markup" [tsSnippet]="snippets.basic.code">
         <ngbd-alert-basic></ngbd-alert-basic>
       </ngbd-example-box>
       <ngbd-example-box demoTitle="Closeable Alert" [htmlSnippet]="snippets.closeable.markup" [tsSnippet]="snippets.closeable.code">
