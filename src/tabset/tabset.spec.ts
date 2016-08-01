@@ -1,10 +1,8 @@
-import {inject, async, addProviders} from '@angular/core/testing';
-
-import {TestComponentBuilder} from '@angular/compiler/testing';
+import {inject, async, TestBed, TestComponentBuilder} from '@angular/core/testing';
 
 import {Component} from '@angular/core';
 
-import {NgbTabset, NgbTab, NgbTabContent, NgbTabTitle} from './tabset';
+import {NgbTabsetModule} from './index';
 
 function getTabTitles(nativeEl: HTMLElement) {
   return nativeEl.querySelectorAll('.nav-link');
@@ -48,6 +46,9 @@ function getButton(nativeEl: HTMLElement) {
 }
 
 describe('ngb-tabset', () => {
+
+  beforeEach(() => { TestBed.configureTestingModule({imports: [NgbTabsetModule]}); });
+
   it('should render tabs and select first tab as active by default', async(inject([TestComponentBuilder], (tcb) => {
        const html = `
       <ngb-tabset>
@@ -395,7 +396,7 @@ describe('ngb-tabset', () => {
      })));
 });
 
-@Component({selector: 'test-cmp', directives: [NgbTabset, NgbTab, NgbTabContent, NgbTabTitle], template: ''})
+@Component({selector: 'test-cmp', template: ''})
 class TestComponent {
   activeTabId;
 }

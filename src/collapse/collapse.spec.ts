@@ -1,13 +1,8 @@
-import {
-  inject,
-  async,
-} from '@angular/core/testing';
-
-import {TestComponentBuilder} from '@angular/compiler/testing';
+import {inject, async, TestBed, TestComponentBuilder} from '@angular/core/testing';
 
 import {Component} from '@angular/core';
 
-import {NgbCollapse} from './collapse';
+import {NgbCollapseModule} from './index';
 
 function getCollapsibleContent(element: HTMLElement): HTMLDivElement {
   return <HTMLDivElement>element.querySelector('.collapse');
@@ -15,6 +10,8 @@ function getCollapsibleContent(element: HTMLElement): HTMLDivElement {
 
 describe('ngb-collapse', () => {
   let html = `<div [ngbCollapse]="collapsed">Some content</div>`;
+
+  beforeEach(() => { TestBed.configureTestingModule({imports: [NgbCollapseModule]}); });
 
   it('should have content open and aria-expanded true', async(inject([TestComponentBuilder], (tcb) => {
        tcb.overrideTemplate(TestComponent, html).createAsync(TestComponent).then((fixture) => {
@@ -81,7 +78,7 @@ describe('ngb-collapse', () => {
      })));
 });
 
-@Component({selector: 'test-cmp', directives: [NgbCollapse], template: ''})
+@Component({selector: 'test-cmp', template: ''})
 class TestComponent {
   collapsed = false;
 }

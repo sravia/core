@@ -1,9 +1,8 @@
-import {inject, async, addProviders} from '@angular/core/testing';
-
-import {TestComponentBuilder} from '@angular/compiler/testing';
+import {inject, async, TestBed, TestComponentBuilder} from '@angular/core/testing';
 
 import {Component} from '@angular/core';
 
+import {NgbPaginationModule} from './index';
 import {NgbPagination} from './pagination';
 
 function expectPages(nativeEl: HTMLElement, pagesDef: string[]): void {
@@ -109,6 +108,8 @@ describe('ngb-pagination', () => {
   });
 
   describe('UI logic', () => {
+
+    beforeEach(() => { TestBed.configureTestingModule({imports: [NgbPaginationModule]}); });
 
     it('should render and respond to collectionSize change', async(inject([TestComponentBuilder], (tcb) => {
          const html = '<ngb-pagination [collectionSize]="collectionSize" page="1"></ngb-pagination>';
@@ -413,7 +414,7 @@ describe('ngb-pagination', () => {
 
 });
 
-@Component({selector: 'test-cmp', directives: [NgbPagination], template: ''})
+@Component({selector: 'test-cmp', template: ''})
 class TestComponent {
   pageSize = 10;
   collectionSize = 100;

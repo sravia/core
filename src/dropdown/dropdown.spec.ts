@@ -1,17 +1,19 @@
-import {inject, async, addProviders} from '@angular/core/testing';
-
-import {TestComponentBuilder} from '@angular/compiler/testing';
+import {inject, async, TestBed, TestComponentBuilder} from '@angular/core/testing';
 
 import {Component} from '@angular/core';
 import {By} from '@angular/platform-browser';
 
-import {NgbDropdown, NgbDropdownToggle} from './dropdown';
+import {NgbDropdownModule} from './index';
+import {NgbDropdown} from './dropdown';
 
 function getDropdownEl(tc) {
   return tc.querySelector(`[ngbDropdown]`);
 }
 
 describe('ngb-dropdown', () => {
+
+  beforeEach(() => { TestBed.configureTestingModule({imports: [NgbDropdownModule]}); });
+
   it('should be closed by default', async(inject([TestComponentBuilder], (tcb) => {
        const html = `<div ngbDropdown></div>`;
 
@@ -116,6 +118,9 @@ describe('ngb-dropdown', () => {
 });
 
 describe('ngb-dropdown-toggle', () => {
+
+  beforeEach(() => { TestBed.configureTestingModule({imports: [NgbDropdownModule]}); });
+
   it('should toggle dropdown on click', async(inject([TestComponentBuilder], (tcb) => {
        const html = `
       <div ngbDropdown>
@@ -278,7 +283,7 @@ describe('ngb-dropdown-toggle', () => {
      })));
 });
 
-@Component({selector: 'test-cmp', directives: [NgbDropdown, NgbDropdownToggle], template: ''})
+@Component({selector: 'test-cmp', template: ''})
 class TestComponent {
   isOpen = false;
 }

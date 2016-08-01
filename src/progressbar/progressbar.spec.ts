@@ -1,10 +1,9 @@
-import {inject, async} from '@angular/core/testing';
-
-import {TestComponentBuilder} from '@angular/compiler/testing';
+import {inject, async, TestBed, TestComponentBuilder} from '@angular/core/testing';
 
 import {Component} from '@angular/core';
 
 import {NgbProgressbar} from './progressbar';
+import {NgbProgressbarModule} from './index';
 
 function getBarWidth(nativeEl): string {
   return nativeEl.querySelector('.progress-bar').style.width;
@@ -68,6 +67,9 @@ describe('ng-progressbar', () => {
   });
 
   describe('UI logic', () => {
+
+    beforeEach(() => { TestBed.configureTestingModule({imports: [NgbProgressbarModule]}); });
+
     it('accepts a value and respond to value changes', async(inject([TestComponentBuilder], (tcb) => {
          const html = '<ngb-progressbar [value]="value"></ngb-progressbar>';
 
@@ -180,7 +182,7 @@ describe('ng-progressbar', () => {
   });
 });
 
-@Component({selector: 'test-cmp', directives: [NgbProgressbar], template: ''})
+@Component({selector: 'test-cmp', template: ''})
 class TestComponent {
   value = 10;
   max = 50;

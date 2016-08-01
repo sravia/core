@@ -1,10 +1,8 @@
-import {inject, async, fakeAsync, tick} from '@angular/core/testing';
-
-import {TestComponentBuilder} from '@angular/compiler/testing';
+import {inject, async, fakeAsync, tick, TestBed, TestComponentBuilder} from '@angular/core/testing';
 
 import {Component} from '@angular/core';
 
-import {NgbAlert, NgbDismissibleAlert} from './alert';
+import {NgbAlertModule} from './index';
 
 function getAlertElement(element: HTMLElement): HTMLDivElement {
   return <HTMLDivElement>element.querySelector('.alert');
@@ -15,6 +13,9 @@ function getCloseButton(element: HTMLElement): HTMLButtonElement {
 }
 
 describe('ngb-alert', () => {
+
+  beforeEach(() => { TestBed.configureTestingModule({imports: [NgbAlertModule]}); });
+
   it('should have type warning and by dismissible by default', async(inject([TestComponentBuilder], (tcb) => {
        tcb.overrideTemplate(TestComponent, '<ngb-alert>Watch out!</ngb-alert>')
            .createAsync(TestComponent)
@@ -49,6 +50,8 @@ describe('ngb-alert', () => {
 });
 
 describe('NgbDismissibleAlert', () => {
+
+  beforeEach(() => { TestBed.configureTestingModule({imports: [NgbAlertModule]}); });
 
   it('should open a dismissible alert with default type', async(inject([TestComponentBuilder], (tcb) => {
        tcb.overrideTemplate(TestComponent, '<template ngbAlert>Hello, {{name}}!</template>')
@@ -122,7 +125,7 @@ describe('NgbDismissibleAlert', () => {
 
 });
 
-@Component({selector: 'test-cmp', directives: [NgbAlert, NgbDismissibleAlert], template: '', precompile: [NgbAlert]})
+@Component({selector: 'test-cmp', template: ''})
 class TestComponent {
   name = 'World';
   closed = false;

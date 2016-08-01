@@ -1,9 +1,8 @@
-import {inject, async, addProviders} from '@angular/core/testing';
-
-import {TestComponentBuilder} from '@angular/compiler/testing';
+import {inject, async, TestBed, TestComponentBuilder} from '@angular/core/testing';
 
 import {Component} from '@angular/core';
 
+import {NgbRatingModule} from './index';
 import {NgbRating} from './rating';
 
 function getAriaState(compiled) {
@@ -33,8 +32,13 @@ function getState(compiled) {
 }
 
 describe('ngb-rating', () => {
+
+  beforeEach(() => { TestBed.configureTestingModule({imports: [NgbRatingModule]}); });
+
   it('should show 10 stars by default', async(inject([TestComponentBuilder], (tcb) => {
-       tcb.createAsync(NgbRating).then((fixture) => {
+       const html = '<ngb-rating></ngb-rating>';
+
+       return tcb.overrideTemplate(TestComponent, html).createAsync(TestComponent).then((fixture) => {
          fixture.detectChanges();
 
          const compiled = fixture.nativeElement;
@@ -170,7 +174,7 @@ describe('ngb-rating', () => {
   });
 });
 
-@Component({selector: 'test-cmp', directives: [NgbRating], template: ''})
+@Component({selector: 'test-cmp', template: ''})
 class TestComponent {
   max: number = 10;
 }

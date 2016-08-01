@@ -1,6 +1,4 @@
-import {Component, Input} from '@angular/core';
-import {HTTP_PROVIDERS, JSONP_PROVIDERS} from '@angular/http';
-import {NGB_TYPEAHEAD_DIRECTIVES, NGB_PRECOMPILE} from '@ng-bootstrap/ng-bootstrap';
+import {Component} from '@angular/core';
 
 import {Injectable} from '@angular/core';
 import {Jsonp, URLSearchParams} from '@angular/http';
@@ -31,9 +29,7 @@ export class WikipediaService {
 @Component({
   selector: 'ngbd-typeahead-http',
   template: require('./typeahead-http.html'),
-  directives: [NGB_TYPEAHEAD_DIRECTIVES],
-  precompile: [NGB_PRECOMPILE],
-  providers: [HTTP_PROVIDERS, JSONP_PROVIDERS, WikipediaService],
+  providers: [WikipediaService],
   styles: [`.form-control { width: 300px; display: inline; }`]
 })
 export class NgbdTypeaheadHttp {

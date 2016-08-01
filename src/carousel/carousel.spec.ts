@@ -1,10 +1,10 @@
-import {inject, fakeAsync, discardPeriodicTasks, tick, addProviders} from '@angular/core/testing';
-import {TestComponentBuilder} from '@angular/compiler/testing';
+import {inject, fakeAsync, discardPeriodicTasks, tick, TestBed, TestComponentBuilder} from '@angular/core/testing';
 
 import {By} from '@angular/platform-browser';
 import {Component} from '@angular/core';
 
-import {NgbCarousel, NgbSlide} from './carousel';
+import {NgbCarouselModule} from './index';
+import {NgbCarousel} from './carousel';
 
 function expectActiveSlides(nativeEl: HTMLDivElement, active: boolean[]) {
   const slideElms = nativeEl.querySelectorAll('.carousel-item');
@@ -25,6 +25,9 @@ function expectActiveSlides(nativeEl: HTMLDivElement, active: boolean[]) {
 }
 
 describe('ngb-carousel', () => {
+
+  beforeEach(() => { TestBed.configureTestingModule({imports: [NgbCarouselModule]}); });
+
   it('should render slides and navigation indicators', fakeAsync(inject([TestComponentBuilder], (tcb) => {
        const html = `
       <ngb-carousel>
@@ -357,7 +360,7 @@ describe('ngb-carousel', () => {
 
 });
 
-@Component({selector: 'test-cmp', directives: [NgbCarousel, NgbSlide], template: ''})
+@Component({selector: 'test-cmp', template: ''})
 class TestComponent {
   activeSlideId;
   keyboard = true;

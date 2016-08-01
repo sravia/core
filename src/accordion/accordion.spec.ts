@@ -1,10 +1,7 @@
-import {inject, async, addProviders} from '@angular/core/testing';
-
-import {TestComponentBuilder} from '@angular/compiler/testing';
-
 import {Component} from '@angular/core';
+import {inject, async, TestBed, TestComponentBuilder} from '@angular/core/testing';
 
-import {NGB_ACCORDION_DIRECTIVES} from './accordion';
+import {NgbAccordionModule} from './index';
 
 function getPanels(element: HTMLElement): HTMLDivElement[] {
   return <HTMLDivElement[]>Array.from(element.querySelectorAll('div .card-header'));
@@ -28,6 +25,8 @@ function expectOpenPanels(nativeEl: HTMLElement, openPanelsDef: boolean[]) {
 
 describe('ngb-accordion', () => {
   let html: string;
+
+  beforeEach(() => { TestBed.configureTestingModule({imports: [NgbAccordionModule]}); });
 
   beforeEach(() => {
     html = `
@@ -316,7 +315,7 @@ describe('ngb-accordion', () => {
      })));
 });
 
-@Component({selector: 'test-cmp', directives: [NGB_ACCORDION_DIRECTIVES], template: ''})
+@Component({selector: 'test-cmp', template: ''})
 class TestComponent {
   activeIds = [];
   classType;

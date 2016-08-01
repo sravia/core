@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {NGB_TYPEAHEAD_DIRECTIVES, NGB_PRECOMPILE} from '@ng-bootstrap/ng-bootstrap';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -61,8 +60,6 @@ const statesWithFlags = [
 @Component({
   selector: 'ngbd-typeahead-template',
   template: require('./typeahead-template.html'),
-  directives: [NGB_TYPEAHEAD_DIRECTIVES],
-  precompile: [NGB_PRECOMPILE],
   styles: [`.form-control { width: 300px; }`]
 })
 export class NgbdTypeaheadTemplate {

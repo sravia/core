@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {NGB_TYPEAHEAD_DIRECTIVES, NGB_PRECOMPILE} from '@ng-bootstrap/ng-bootstrap';
 import {Observable} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
@@ -16,8 +15,6 @@ const states = ['Alabama', 'Alaska', 'American Samoa', 'Arizona', 'Arkansas', 'C
 @Component({
   selector: 'ngbd-typeahead-format',
   template: require('./typeahead-format.html'),
-  directives: [NGB_TYPEAHEAD_DIRECTIVES],
-  precompile: [NGB_PRECOMPILE],
   styles: [`.form-control { width: 300px; }`]
 })
 export class NgbdTypeaheadFormat {
