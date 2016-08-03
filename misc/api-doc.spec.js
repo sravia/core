@@ -88,7 +88,19 @@ describe('APIDocVisitor', function() {
     expect(outDocs[1].name).toBe('myMappedEvent');
   });
 
-});
+  it('should extract public methods info', function() {
+    var methodDocs = apiDoc(['./misc/api-doc-test-cases/directives-with-methods.ts']).Foo.methods;
 
-// TODO: extract types for setters
-// TODO: other members (we are only interested in public, non-lifecycle members)
+    expect(methodDocs.length).toBe(1);
+    expect(methodDocs[0].name).toBe('fooMethod');
+    expect(methodDocs[0].description).toBe('Use this one to produce foo!');
+    expect(methodDocs[0].args.length).toBe(3);
+    expect(methodDocs[0].args[0].name).toBe('arg1');
+    expect(methodDocs[0].args[0].type).toBe('string');
+    expect(methodDocs[0].args[1].name).toBe('arg2');
+    expect(methodDocs[0].args[1].type).toBe('any');
+    expect(methodDocs[0].args[2].name).toBe('arg3');
+    expect(methodDocs[0].args[2].type).toBe('number');
+  });
+
+});
